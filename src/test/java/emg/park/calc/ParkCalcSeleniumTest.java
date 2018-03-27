@@ -11,7 +11,9 @@ import org.openqa.selenium.support.ui.Select;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+/**
+ * Sample test using Selenium Webelements
+ */
 public class ParkCalcSeleniumTest {
     private WebDriver driver;
 

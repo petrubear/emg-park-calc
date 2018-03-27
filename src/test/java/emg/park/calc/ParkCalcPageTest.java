@@ -1,29 +1,30 @@
 package emg.park.calc;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import emg.park.calc.context.TestContext;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+/**
+ * Sample test using Selenium Pagemodel
+ */
 public class ParkCalcPageTest {
-    private WebDriver driver;
+    private TestContext testContext;
     private ParkCalcPage parkCalcPage;
 
     @BeforeEach
-    public void setUp() throws Exception {
-        var options = new ChromeOptions();
-        options.setHeadless(false);
-        driver = new ChromeDriver(options);
+    public void setUp() {
+        //TODO: this should be injected (picocontainer + constructor?)
+        this.testContext = new TestContext();
 
-        parkCalcPage = new ParkCalcPage(driver);
+        this.parkCalcPage = this.testContext.getPageObjectManager().getParkCalcPage();
     }
 
     @Test
-    public void testSameDay() throws Exception {
+    public void testSameDay() {
         parkCalcPage.navigate();
         parkCalcPage.userEconomyParking();
         parkCalcPage.setEntryDate("03/19/2018");
@@ -35,13 +36,12 @@ public class ParkCalcPageTest {
 
         parkCalcPage.calculate();
         var ammount = parkCalcPage.getCalculatedCost().getText();
-        assertTrue(ammount.contains("6.00"));
-//        assertEquals("Should be equals", "$ 6.00        (0 Days, 3 Hours, 0 Minutes)", ammount);
+        assertThat(ammount, containsString("6.00"));
     }
 
     @AfterEach
-    public void tearDown() throws Exception {
-        driver.close();
+    public void tearDown() {
+        this.testContext.getWebDriverManager().closeDriver();
     }
 
 }
