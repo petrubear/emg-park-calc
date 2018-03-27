@@ -1,0 +1,114 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>emg.demo.park.calc</groupId>
+	<artifactId>emg-park-calc</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<maven.compiler.source>10</maven.compiler.source>
+		<maven.compiler.target>10</maven.compiler.target>
+		<cucumber.version>2.3.1</cucumber.version>
+		<cucumber.version>2.3.1</cucumber.version>
+		<junit.version>5.1.0</junit.version>
+		<junit-platform.version>1.1.0</junit-platform.version>
+		<selenium.version>3.10.0</selenium.version>
+	</properties>
+
+	<dependencies>
+		<!-- These are the cucumber dependencies -->
+		<!-- <dependency> <groupId>io.cucumber</groupId> <artifactId>cucumber-java</artifactId>
+			<version>${cucumber.version}</version> <scope>test</scope> </dependency>
+			<dependency> <groupId>io.cucumber</groupId> <artifactId>cucumber-junit</artifactId>
+			<version>${cucumber.version}</version> <scope>test</scope> </dependency>
+			<dependency> <groupId>io.cucumber</groupId> <artifactId>cucumber-picocontainer</artifactId>
+			<version>${cucumber.version}</version> <scope>test</scope> </dependency>
+			<dependency> <groupId>org.picocontainer</groupId> <artifactId>picocontainer</artifactId>
+			<version>2.15</version> <scope>test</scope> </dependency> -->
+
+		<!-- These are the selenium dependencies -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-api</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-chrome-driver</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+
+
+		<!-- These are the junit dependencies -->
+		<!-- <dependency> <groupId>junit</groupId> <artifactId>junit</artifactId>
+			<version>${junit.version}</version> <scope>test</scope> </dependency> -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- <dependency> <groupId>org.junit.vintage</groupId> <artifactId>junit-vintage-engine</artifactId>
+			<version>${junit.version}</version> <scope>test</scope> </dependency> -->
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>${junit-platform.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- <dependency> <groupId>org.junit.platform</groupId> <artifactId>junit-platform-runner</artifactId>
+			<version>${junit-platform.version}</version> <scope>test</scope> </dependency> -->
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-toolchains-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<toolchains>
+						<jdk>
+							<version>1.10</version>
+							<vendor>oracle</vendor>
+						</jdk>
+					</toolchains>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>toolchain</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<!-- latest version (2.20.1) does not work well with JUnit5 -->
+				<version>2.19.1</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.junit.platform</groupId>
+						<artifactId>junit-platform-surefire-provider</artifactId>
+						<version>1.0.3</version>
+					</dependency>
+					<dependency>
+						<groupId>org.junit.jupiter</groupId>
+						<artifactId>junit-jupiter-engine</artifactId>
+						<version>5.1.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>
